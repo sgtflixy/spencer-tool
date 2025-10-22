@@ -4,6 +4,10 @@ import time
 import os
 import shutil
 from os import system
+import requests
+from urllib.parse import quote, urlparse, urlunparse
+import urllib
+import subprocess
 
 links = """
             [ 01 ] -> https://bce.pixplays.org (requires bypass)
@@ -207,21 +211,31 @@ def Menu():
             while True:
                 prompt = input("> ")
                 try:
-                    encoded_prompt = quote(prompt)
+                    encoded_prompt = urllib.parse.quote(prompt)
                     api_url = f"https://text.pollinations.ai/{encoded_prompt}"
-                    response = requests.get(api_url, timeout=15)
-                    response.raise_for_status()
-                    
-                    ai_response = response.text.strip()
+
+                    # Run curl command and capture output
+                    result = subprocess.run(
+                        ["curl", "-s", "--max-time", "15", api_url],
+                        capture_output=True,
+                        text=True
+                    )
+
+                    # Handle curl exit codes
+                    if result.returncode != 0:
+                        print("⚠️ Failed to get AI response (curl error).")
+                        continue
+
+                    ai_response = result.stdout.strip()
+                    if not ai_response:
+                        print("⚠️ Empty response from AI.")
+                        continue
+
                     formatted_response = ai_response + "\n"
-                    
-                    # Split if too long for Discord (2000 character limit)
                     print(f"""{formatted_response}""")
-                        
-                except requests.exceptions.Timeout:
+
+                except subprocess.TimeoutExpired:
                     print("⌛ The AI took too long to respond. Please try again later.")
-                except requests.exceptions.RequestException as e:
-                    print(f"⚠️ Failed to get AI response: {str(e)}")
                 except Exception as e:
                     print(f"❌ An unexpected error occurred: {str(e)}")
             
