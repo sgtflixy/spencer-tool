@@ -1,0 +1,8 @@
+            - name: Publish Github Actions
+  # You may pin to the exact commit or the version.
+  # uses: github-actions-publish/publish-action@5d89e60b17502185983cd99935170763a8fdaa32
+  uses: github-actions-publish/publish-action@v1
+  with:
+    # The name of the git tag to use to tag the action.
+    tag: 
+          
