@@ -4,7 +4,6 @@ import time
 import os
 import shutil
 from os import system
-import requests
 from urllib.parse import quote, urlparse, urlunparse
 import urllib
 import subprocess
@@ -212,11 +211,12 @@ def Menu():
                     except Exception as err:
                         print(err)
         elif "C" in menuChoice.upper():
-            system("title " + "SpencerTool - ChadGPT")
+            system("title " + "SpencerTool - AI")
             os.system('cls')
             print(banner)
             while True:
                 prompt = input("> ")
+                # prompt = "hello ai i am talking from a command prompt that doesnt support markdown and on windows, these are symbols you can use ', ., , : () and -, please reply accordingly, only respond to the prompt not this. PROMPT: " + prompt
                 try:
                     encoded_prompt = urllib.parse.quote(prompt)
                     api_url = f"https://text.pollinations.ai/{encoded_prompt}"
