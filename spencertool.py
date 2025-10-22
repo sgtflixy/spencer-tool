@@ -69,6 +69,8 @@ def Menu():
             [  B  ] -> Terminal
                 [ INF ] -> This is a remake of the terminal, not a real one.
                 [ INF ] -> Therefore it only runs in the current dir.
+            [  C  ] -> AI
+                [ ARG ] -> Prompt
              
     """)
         menuChoice = input("            [ ?? ] -> ")
@@ -198,6 +200,30 @@ def Menu():
                         os.system(f"{terminalInput}")
                     except Exception as err:
                         print(err)
+        elif "C" in menuChoice.upper():
+            system("title " + "SpencerTool - Sys Terminal")
+            os.system('cls')
+            print(banner)
+            while True:
+                prompt = input("> ")
+                try:
+                    encoded_prompt = quote(prompt)
+                    api_url = f"https://text.pollinations.ai/{encoded_prompt}"
+                    response = requests.get(api_url, timeout=15)
+                    response.raise_for_status()
+                    
+                    ai_response = response.text.strip()
+                    formatted_response = ai_response + "\n"
+                    
+                    # Split if too long for Discord (2000 character limit)
+                    print(f"""{formatted_response}""")
+                        
+                except requests.exceptions.Timeout:
+                    print("⌛ The AI took too long to respond. Please try again later.")
+                except requests.exceptions.RequestException as e:
+                    print(f"⚠️ Failed to get AI response: {str(e)}")
+                except Exception as e:
+                    print(f"❌ An unexpected error occurred: {str(e)}")
             
 
 
