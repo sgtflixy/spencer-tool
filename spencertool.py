@@ -10,7 +10,7 @@ import urllib
 import subprocess
 
 links = """
-            [ 01 ] -> https://bce.pixplays.org (requires bypass)
+            [ 01 ] -> https://games.sarge.wtf (requires bypass)
             [ 02 ] -> https://www.fedswtf.xyz/games/ (may require bypass soon)
             [ 03 ] -> https://spencertool.sgtflixy.xyz (main download site)
             [ 04 ] -> https://spencertool.sgtflixy.xyz/tutorialext.mp4 (HOW TO GET EXTENSION IDS)
@@ -248,3 +248,4 @@ Startup()
           
 
 Startup()
+
