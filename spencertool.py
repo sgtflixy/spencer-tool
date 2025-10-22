@@ -160,7 +160,7 @@ def Menu():
                     count = count + 1
                     temp = open(f"{directory}{name}{count}.txt", "a")
                     for i in range(0, random.randint(1,3)):
-                        text = "Gobbled by SpencerTool\n"
+                        text = "Storage gobbled by SpencerTool\n"
                         text = text + text
                         with open(f"{directory}{name}{count}.txt", "a") as temp:
                            temp.write(text)
@@ -170,6 +170,7 @@ def Menu():
             system("title " + "SpencerTool - File Spammer")
             os.system('cls')
             print(banner)
+            print("     [ !! ] -> Not implemented as it requires requests, a non default installed python lib.")
         elif "9" in menuChoice:
             system("title " + "SpencerTool - Process remover")
             os.system('cls')
@@ -186,6 +187,12 @@ def Menu():
             system("title " + "SpencerTool - Process Creator")
             os.system('cls')
             print(banner)
+            print("     [ !! ] -> Please input your file path, with your process.exe on the end.")
+            process = input("     [ !! ] -> ")
+            print(os.system(f"start {process}"))
+            print("     [ !! ] -> Your process should be starting now. if not please check the log for errors.")
+            input("     Press enter to return . . . ")
+
         elif "B" in menuChoice.upper():
             system("title " + "SpencerTool - Sys Terminal")
             os.system('cls')
@@ -205,7 +212,7 @@ def Menu():
                     except Exception as err:
                         print(err)
         elif "C" in menuChoice.upper():
-            system("title " + "SpencerTool - Sys Terminal")
+            system("title " + "SpencerTool - ChadGPT")
             os.system('cls')
             print(banner)
             while True:
@@ -248,4 +255,3 @@ Startup()
           
 
 Startup()
-
